@@ -1,0 +1,46 @@
+.screen-name-input {
+
+}
+
+.name-input-wrapper {
+	z-index: 1;
+	position: relative;
+
+	width: max(200px, 60% - var(--margin)*2);
+
+	padding: var(--margin);
+
+	background-color: var(--color-3);
+	border: 10px var(--color-4) solid;
+	border-radius: var(--border-radius);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.name-input {
+	--line-height: 35px;
+
+	z-index: 2;
+	position: relative;
+
+	width: calc(100% - var(--margin) - 2px);
+
+	height: var(--line-height);
+	min-height: var(--line-height);
+
+	padding: 5px;
+
+	border: 1px solid #969696;
+	border-radius: var(--border-radius);
+	outline: none;
+
+	background-color: var(--color-5);
+
+	text-align: center;
+	font-size: 30px;
+	line-height: var(--line-height);
+
+	font-family: Roboto;
+}

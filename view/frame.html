@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+
+		<title>Chat</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+		<link rel="stylesheet" type="text/css" href="view/style.css">
+		<link rel="stylesheet" type="text/css" href="view/name-input.css">
+        <link rel="stylesheet" type="text/css" href="view/chat.css">
+		
+		<script type="text/javascript" src="view/display.js"></script>
+	</head>
+
+	<body onload="init()" onresize="resize()">
+		<input type="radio" id="screen-name-input-radio" name="screen" tabindex="-1" checked>
+		<input type="radio" id="screen-chat-radio" name="screen" tabindex="-1">
+
+        <div class="screen screen-name-input">
+			<!--<input type="checkbox" id="name-input-checkbox" tabindex="-1">-->
+
+			<div class="name-input-wrapper">
+				<input class="name-input" placeholder="Your nickname..." maxlength="30" aria-multiline="false" tabindex="0" autofocus></input>
+				<!--<button for="screen-settings-radio" class="btn btn-choose-name" onclick="chooseName()"></button>-->
+			</div>
+        </div> 
+
+        <div class="screen screen-chat">
+			<div class="chat">
+				<textarea class="chat-input" placeholder="Write a message..." maxlength="4096" tabindex="0" oninput="resize()"></textarea>
+				<div class="chat-input-hidden" aria-multiline="true"></div>
+				
+				<div class="messages"></div>
+			</div>
+        </div>
+	</body>
+</html>

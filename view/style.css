@@ -1,0 +1,84 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url('../assets/fonts/Roboto.ttf');
+}
+
+:root {
+	--margin: 10px;
+	--border-radius: 8px;
+
+	--color-1: hsl(240, 27%, 18%);
+	--color-2: hsl(232, 17%, 35%);
+	--color-3: hsl(309, 6%, 58%);
+	--color-4: hsl(11, 24%, 72%);
+	--color-5: hsl(21, 35%, 92%);
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+
+	margin: 0;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	font-family: Roboto;
+	color: var(--color-1);
+
+	background-color: var(--color-5);
+}
+
+.screen {
+	position: absolute;
+	width: calc(100% - var(--margin)*4);
+	height: calc(100% - var(--margin)*4);
+	padding: calc(var(--margin) * 2);
+
+	display: none;
+	align-items: center;
+	justify-content: center;
+}
+
+#screen-name-input-radio:checked ~ .screen-name-input {
+	display: flex;
+}
+
+#screen-chat-radio:checked ~ .screen-chat {
+	display: flex;
+}
+
+input[type="radio"], input[type="checkbox"] {
+	position: absolute;
+	width: 0;
+    height: 0;
+
+	opacity: 0;
+}
+
+::-webkit-scrollbar {
+	width: 20px;
+	height: 20px;
+
+	border-radius: 0 var(--border-radius) var(--border-radius) 0;
+
+	background-clip: content-box;
+
+	background-color: var(--color-1);
+}
+
+::-webkit-scrollbar-thumb {
+	border: 4px solid transparent;
+	border-radius: 0 var(--border-radius) var(--border-radius) 0;
+	background-clip: content-box;
+
+	background-color: var(--color-2);
+	opacity: 0.2;
+}
+
+::-webkit-scrollbar-corner {
+	background-color: transparent;
+}
