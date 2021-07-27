@@ -30,7 +30,7 @@ function initEvents() {
 	elements.nameInput.onkeydown = async (event) => {
 		if (event.keyCode == 13) {
 			const name = elements.nameInput.value;
-			const result = await request('setName', {'username': name});
+			const result = await request("setName", {'username': name});
 
 			if (result)
 				checkboxes.screen.chat.checked = true;
@@ -41,11 +41,13 @@ function initEvents() {
 		if (event.keyCode == 13 && !event.shiftKey) {
 			event.preventDefault();
 
-			const message = elements.chatInput.value;
+			let message = elements.chatInput.value;
+			message = encodeURIComponent(message);
+
 			elements.chatInput.value = "";
 			setInputHeight(elements.chatInput, elements.chatHiddenInput, elements.chat);
 
-			request('newMessage', {'message': message});
+			request("newMessage", {'message': message});
         }   
 	};
 }
@@ -75,20 +77,21 @@ async function request(func, params=null) {
 
 	if (params) {
 		for (param in params) {
-			let value = params[param];
-			
-			/*if (value) {
-				console.log(param, value);
-				value = value.replace("+", "&#43");
-				value = encodeURIComponent(value);
-			}*/
-
+			const value = params[param];
 			data += `&${param}=${value}`;
 		}
 	}
 
-	let response = await fetch(`model/server.php?${data}`);
-	let result = await response.json();
+	const options = {
+		method: 'POST',
+		headers: {
+			'Content-Type': "application/x-www-form-urlencoded;charset=UTF-8"
+		},
+		body: data
+	}
+
+	const response = await fetch("model/server.php", options);
+	const result = await response.json();
 
 	return result;
 }

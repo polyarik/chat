@@ -1,6 +1,5 @@
 ﻿<?php
 
-header("Content-Type: text/html; charset=utf-8");
 error_reporting(E_ALL);
 //ini_set('display_errors','Off');
 
@@ -12,10 +11,10 @@ require("functions.php"); //require_once()
 
 identifyUser();
 
-if (isset($_GET['func'])) {
-	switch ($_GET['func']) {
+if (isset($_POST['func'])) {
+	switch ($_POST['func']) {
 		case 'setName': {
-			$username = str_replace("\n", "", $_GET['username']);
+			$username = str_replace("\n", "", $_POST['username']);
 			$username = validateString($link, $username, 30);
 			
 			if ($username) {
@@ -28,7 +27,7 @@ if (isset($_GET['func'])) {
 		}
 
 		case 'newMessage': {
-			$message = validateString($link, $_GET['message']);
+			$message = validateString($link, $_POST['message']);
 
 			if ($message) {
 				$result = addMessage($link, $message);
@@ -40,8 +39,8 @@ if (isset($_GET['func'])) {
 		}
 
 		case 'getMessages': {
-			$from = ctype_digit($_GET['from']) ? intval($_GET['from']) : null;
-			$to = ctype_digit($_GET['to']) ? intval($_GET['to']) : null;
+			$from = ctype_digit($_POST['from']) ? intval($_POST['from']) : null;
+			$to = ctype_digit($_POST['to']) ? intval($_POST['to']) : null;
 
 			$result = selectMessages($link, $from, $to);
 			$messages = array();
@@ -56,7 +55,7 @@ if (isset($_GET['func'])) {
 		}
 
 		case 'eraseAllMessages': {
-			if ($GET['password'] === PASSWORD) {
+			if ($_POST['password'] === PASSWORD) {
 				$res = deleteAllMessages($link);
 				echo json_encode($res);
 			} else
@@ -81,7 +80,6 @@ function validateString($link, $string, $maxLen=4096) {
 	if (gettype($string) === "string" && strlen($string) > 0 && !ctype_space($string)) {
 		$string = str_replace("<", "&lt", $string);
 		$string = str_replace(">", "&gt", $string);
-		//$string = str_replace("\n", "<br>", $string) . "<br>";
 		$string = mysqli_real_escape_string($link, $string);
 
 		return $string;
