@@ -4,6 +4,9 @@
 	datetime.setHours(datetime.getHours() + timeZone);
 
 	const time = datetime.toLocaleString('en-US', {
+		year: '2-digit',
+		month: 'numeric',
+		day: 'numeric',
 		hour: 'numeric',
 		minute: 'numeric',
 		hour12: true
