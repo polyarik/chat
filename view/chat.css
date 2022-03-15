@@ -87,7 +87,6 @@
 	border-radius: var(--border-radius);
 
 	display: flex;
-	justify-content: start;
 	flex-direction: column-reverse;
 	align-items: flex-start;
 	flex-wrap: nowrap;
